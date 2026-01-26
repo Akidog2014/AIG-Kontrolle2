@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fragebaum - Frage 1</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    .titel {
+      font-size: 35px;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    select, button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      margin: 8px 0;
+      box-sizing: border-box;
+    }
+
+    /* Seitensteuerung */
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<div class="titel">Ausländergesetz</div>
+
+<!-- ================= SEITE 1 ================= -->
+<div id="page1" class="page active">
+  <h2>Woher stammt die Person?</h2>
+
+  <select id="countrySelect">
+    <option value="">Bitte auswählen</option>
+
+    <option>Afghanistan</option>
+    <option>Ägypten</option>
+    <option>Albanien</option>
+    <option>Algerien</option>
+    <option>Andorra</option>
+    <option>Angola</option>
+    <option>Antigua und Barbuda</option>
+    <option>Äquatorial-Guinea</option>
+    <option>Argentinien</option>
+    <option>Armenien</option>
+    <option>Aserbaidschan</option>
+    <option>Äthiopien</option>
+    <option>Australien</option>
+    <option>Bahamas</option>
+    <option>Bahrain</option>
+    <option>Bangladesh</option>
+    <option>Barbados</option>
+    <option>Belarus</option>
+
+    <option>Belgien (Schengen)</option>
+    <option>Belize</option>
+    <option>Benin</option>
+    <option>Bhutan</option>
+    <option>Bolivien</option>
+    <option>Bosnien-Herzegowina</option>
+    <option>Botswana</option>
+    <option>Brasilien</option>
+    <option>Brunei</option>
+
+    <option>Bulgarien (Schengen)</option>
+    <option>Burkina Faso</option>
+    <option>Burundi</option>
+    <option>Chile</option>
+    <option>China (Volksrepublik China)</option>
+    <option>Macao</option>
+    <option>Costa Rica</option>
+
+    <option>Dänemark (Schengen)</option>
+    <option>Deutschland (Schengen)</option>
+    <option>Estland (Schengen)</option>
+    <option>Finnland (Schengen)</option>
+    <option>Frankreich (Schengen)</option>
+    <option>Griechenland (Schengen)</option>
+    <option>Irland (Schengen)</option>
+    <option>Island (Schengen)</option>
+    <option>Italien (Schengen)</option>
+    <option>Kroatien (Schengen)</option>
+    <option>Lettland (Schengen)</option>
+    <option>Liechtenstein (Schengen)</option>
+    <option>Litauen (Schengen)</option>
+    <option>Luxemburg (Schengen)</option>
+    <option>Malta (Schengen)</option>
+    <option>Monaco (Schengen)</option>
+    <option>Niederlande (Schengen)</option>
+    <option>Norwegen (Schengen)</option>
+    <option>Österreich (Schengen)</option>
+    <option>Polen (Schengen)</option>
+    <option>Portugal (Schengen)</option>
+    <option>Rumänien (Schengen)</option>
+    <option>Schweden (Schengen)</option>
+    <option>Slowakei (Schengen)</option>
+    <option>Slowenien (Schengen)</option>
+    <option>Spanien (Schengen)</option>
+    <option>Ungarn (Schengen)</option>
+    <option>Zypern (zukünftiges Schengenmitglied)</option>
+  </select>
+
+  <button onclick="weiter()">Weiter</button>
+</div>
+
+<!-- ================= SEITE 2 ================= -->
+<div id="page2" class="page">
+  <h2>Frage 2</h2>
+  <p>Diese Seite erscheint bei Schengen-Ländern.</p>
+</div>
+
+<!-- ================= SEITE 3 ================= -->
+<div id="page3" class="page">
+  <h2>Frage 3</h2>
+  <p>Diese Seite erscheint bei Nicht-Schengen-Ländern.</p>
+</div>
+
+<script>
+const schengen = [
+  "Belgien (Schengen)","Bulgarien (Schengen)","Dänemark (Schengen)",
+  "Deutschland (Schengen)","Estland (Schengen)","Finnland (Schengen)",
+  "Frankreich (Schengen)","Griechenland (Schengen)","Irland (Schengen)",
+  "Island (Schengen)","Italien (Schengen)","Kroatien (Schengen)",
+  "Lettland (Schengen)","Liechtenstein (Schengen)","Litauen (Schengen)",
+  "Luxemburg (Schengen)","Malta (Schengen)","Monaco (Schengen)",
+  "Niederlande (Schengen)","Norwegen (Schengen)","Österreich (Schengen)",
+  "Polen (Schengen)","Portugal (Schengen)","Rumänien (Schengen)",
+  "Schweden (Schengen)","Slowakei (Schengen)","Slowenien (Schengen)",
+  "Spanien (Schengen)","Ungarn (Schengen)",
+  "Zypern (zukünftiges Schengenmitglied)"
+];
+
+function weiter() {
+  const land = document.getElementById("countrySelect").value;
+
+  if (land === "") {
+    alert("Bitte wählen Sie ein Land aus.");
+    return;
+  }
+
+  if (schengen.includes(land)) {
+    // ➜ Schengen → Frage 2
+    window.location.href = "frage2.html";
+  } else {
+    // ➜ Nicht-Schengen → Frage 11
+    window.location.href = "frage11.html";
+  }
+}
+</script>
+
+
+</body>
+</html>
